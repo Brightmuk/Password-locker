@@ -67,7 +67,7 @@ def intro():
             print("Enter your password")
             authentification = input()
             while True:
-                print("cc-to view credentials of your account")
+                print("cc-To create new credential, ex-exit account, vc-To view all your credentials")
                 short_code=input().lower()
                 if short_code == 'cc':
 
@@ -78,6 +78,17 @@ def intro():
                     print(f"{account_name} has been saved")
 
                     save_credential(create_credential(account_name,password))
+                elif short_code == 'vc':
+                    if display_credentials:
+                        print("Here is a list of all your accounts and passwords")
+                        for credential in display_credentials():
+                            print(f"{credential.account_name} {credential.password}")
+                            
+                elif short_code == 'ex':
+                    print("You have exited your account")
+                    break
+                else:
+                    print("Please use the codes provided")
 
         else:
             print("Ok well.")

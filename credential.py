@@ -12,7 +12,7 @@ class Credential:
         self.account_name = account_name
         self.password = password
     @classmethod
-    def display_user_credentials(cls):
+    def display_credentials(cls):
         '''
         method that returns credentials of a user
         '''

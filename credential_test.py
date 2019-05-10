@@ -26,10 +26,10 @@ class TestUser(unittest.TestCase):
         '''
         self.new_credential.save_credential()
         self.assertEqual(len(Credential.credential_list),1)
-    def test_display_user_credentials(self):
+    def test_display_credentials(self):
         '''
         test to display the credentials of a user
         '''
-        self.assertEqual(Credential.display_user_credentials(),Credential.credential_list)
+        self.assertEqual(Credential.display_credentials(),Credential.credential_list)
 if __name__ == '__main__':
     unittest.main()
