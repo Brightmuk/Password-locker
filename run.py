@@ -1,4 +1,22 @@
 from user import User
+from credential import Credential
+
+def create_credential(account_name,password):
+    '''
+    function to create a new credential
+    '''
+    new_credential = Credential(account_name,password)
+    return new_credential
+def save_credential(credential):
+    '''
+    function to save a credential
+    '''
+    credential.save_credential()
+def display_credentials():
+    '''
+    function that dispalys all credentials
+    '''
+    return Credential.display_credentials()
 
 def create_user(f_name,s_name,password):
     '''
@@ -34,16 +52,33 @@ def intro():
             print("Enter your second name...")
             s_name=input()
 
-            print("Enter your password...")
-            password1=input()
-
             print("Please confirm your password...")
             password=input()
+
+
 
             save_users(create_user(f_name,s_name,password))
             print('\n')
             print(f"Congratulations {f_name} {s_name}, you now have an account")
             print('\n')
+        elif short_code == 'lg':
+            print("Enter the name of your registered account")
+            account_name = input()
+            print("Enter your password")
+            authentification = input()
+            while True:
+                print("cc-to view credentials of your account")
+                short_code=input().lower()
+                if short_code == 'cc':
+
+                    print("Enter account name")
+                    account_name = input()
+                    print("Enter its password")
+                    password = input()
+                    print(f"{account_name} has been saved")
+
+                    save_credential(create_credential(account_name,password))
+
         else:
             print("Ok well.")
             break

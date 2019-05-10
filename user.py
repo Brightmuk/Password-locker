@@ -1,3 +1,4 @@
+from credential import Credential
 class User:
     '''
     class that generates new instances of users accounts
@@ -15,6 +16,7 @@ class User:
         self.first_name = first_name
         self.second_name = second_name
         self.password = password
+
     @classmethod
     def display_users(cls):
         '''
