@@ -56,8 +56,11 @@ def intro():
     print("Please sign up for an accout to enjoy services")
 
     while True:
-        print("Use these short codes : su - Sign up, lg - login, ex-Exit app \n")
+        print("⇨ Use these short codes : su - Sign up, lg - login, ex-Exit app ")
+        print('-'*64)
+        print('\n')
         short_code = input().lower()
+        print('\n')
         if short_code == 'su':
             print("New User")
             print("-"*9)
@@ -70,18 +73,19 @@ def intro():
 
             print("Enter your password...")
             password=input()
-
-
+            print('\n')
 
             save_users(create_user(f_name,s_name,password))
             print('\n')
-            print(f"Congratulations {f_name} {s_name}, you now have an account \n")
+            print(f"⇨ Congratulations {f_name} {s_name}, you now have an account \n")
             print('\n')
         elif short_code == 'lg':
            
             print("Enter the first name of your registered account")
             account_name = input()
+            print('\n')
             print("Enter your password")
+            print('\n')
             authentification = input()
             if check_existing_user(authentification):
                 search_account = find_account(authentification)
@@ -89,8 +93,9 @@ def intro():
 
 
                 while True:
-                    print(f"Welcome {search_account.first_name} {search_account.second_name} \n")
-                    print("cc-To create new credential, vc-To view all your credentials, ex-exit account \n ")
+                    print(f"⇨ Welcome {search_account.first_name} {search_account.second_name} \n")
+                    print("⇨ cc-To create new credential, vc-To view all your credentials, ex-exit account \n ")
+                    print('-'*80)   
                     short_code=input().lower()
                     if short_code == 'cc':
                         print("New credential")
@@ -99,7 +104,9 @@ def intro():
                         account_name = input()
                         print("Make a password \n")
                         print("To make your own password press- a, to generate a password press - g \n")
+                        print('-'*50)
                         generate=input()
+                        print('\n')
 
                         if generate == 'g':
                             letters = string.ascii_letters + string.digits
@@ -110,13 +117,14 @@ def intro():
                         elif generate == 'a':
                             print("Enter its password")
                             passkey = input()
-                        print(f"{account_name} has been saved")
+                            print('\n')
+                        print(f"👍_{account_name} has been saved")
                         
                         save_credential(create_credential(account_name,passkey))
 
                     elif short_code == 'vc':
                         if display_credentials:
-                            print("Here is a list of all your accounts and passwords \n")
+                            print("⇨ Here is a list of all your accounts and passwords \n")
                             for credential in display_credentials():
                                 print(f"Account name: {credential.account_name} - password: {credential.passkey}")
                     elif short_code == 'dc':
@@ -125,7 +133,7 @@ def intro():
                         if del_account == account_name:
 
                             Credential.credential_list.remove(credential)
-                            print("Credential deleted")
+                            print("👍_Credential deleted")
                         else:
                             print("No match of such a credential")  
 
@@ -139,10 +147,10 @@ def intro():
         elif short_code == 'ex':
 
             print("Ok well. See yah! \n")
-            print('\n')
+            
             break
         else:
-            print("I cant understand that, please use these codes \n")
+            print("☹ _ I cant understand that, please use these codes \n")
 if __name__ == '__main__':
 
     intro()
