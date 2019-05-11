@@ -17,7 +17,7 @@ class TestUser(unittest.TestCase):
         test_init checks if the object is initialised properly
         '''
         self.assertEqual(self.new_credential.account_name,"twitter")
-        self.assertEqual(self.new_credential.password,"muko12")
+        self.assertEqual(self.new_credential.passkey,"muko12")
 
     def test_save_credential(self):
         '''
@@ -31,5 +31,17 @@ class TestUser(unittest.TestCase):
         test to display the credentials of a user
         '''
         self.assertEqual(Credential.display_credentials(),Credential.credential_list)
+    def test_delete_credential(self):
+        '''
+        test_delete_credential to see if we can remove a 
+        credential from credentials list
+        '''
+        self.new_credential.save_credential()
+        test_credential = Credential("test","0893uhjnv")
+        test_credential.save_credential()
+
+        self.new_credential.delete_credential()
+        self.assertEqual(len(Credential.credential_list),1)
+
 if __name__ == '__main__':
     unittest.main()

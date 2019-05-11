@@ -17,3 +17,11 @@ class Credential:
         method that returns credentials of a user
         '''
         return cls.credential_list
+    @classmethod
+    def delete_credential(cls,account):
+        '''
+        delete a credential
+        '''
+        for credential in cls.credential_list:
+            if credential.account_name == account:
+                return credential

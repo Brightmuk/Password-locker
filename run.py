@@ -19,6 +19,11 @@ def display_credentials():
     function that dispalys all credentials
     '''
     return Credential.display_credentials()
+def del_credential(credential):
+    '''
+    function to delete a credential
+    '''
+    credential.del_credential()
 def check_existing_user(password2):
     '''
     function to check that enable login authentification
@@ -113,7 +118,16 @@ def intro():
                         if display_credentials:
                             print("Here is a list of all your accounts and passwords \n")
                             for credential in display_credentials():
-                                print(f"Account name: {credential.account_name} password: {credential.passkey}")
+                                print(f"Account name: {credential.account_name} - password: {credential.passkey}")
+                    elif short_code == 'dc':
+                        print("Which credential would you like to delete?")
+                        del_account = input()
+                        if del_account == account_name:
+
+                            Credential.credential_list.remove(credential)
+                            print("Credential deleted")
+                        else:
+                            print("No match of such a credential")  
 
                     elif short_code == 'ex':
                         print("You have exited your account \n")
