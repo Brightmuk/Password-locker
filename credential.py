@@ -8,9 +8,9 @@ class Credential:
         save_credential method saves object in credential list
         '''
         Credential.credential_list.append(self)
-    def __init__(self,account_name,password):
+    def __init__(self,account_name,passkey):
         self.account_name = account_name
-        self.password = password
+        self.passkey = passkey
     @classmethod
     def display_credentials(cls):
         '''

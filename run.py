@@ -1,11 +1,13 @@
 from user import User
+import string
+import random
 from credential import Credential
 
-def create_credential(account_name,password):
+def create_credential(account_name,passkey):
     '''
     function to create a new credential
     '''
-    new_credential = Credential(account_name,password)
+    new_credential = Credential(account_name,passkey)
     return new_credential
 def save_credential(credential):
     '''
@@ -17,16 +19,16 @@ def display_credentials():
     function that dispalys all credentials
     '''
     return Credential.display_credentials()
-def check_existing_user(f_name,password):
+def check_existing_user(password2):
     '''
     function to check that enable login authentification
     '''
-    return User.user_exist(f_name,password)
-def find_account(password):
+    return User.user_exist(password2)
+def find_account(password2):
     '''
     function to find account by its name
     '''
-    return User.find_account(password)
+    return User.find_account(password2)
 def create_user(f_name,s_name,password):
     '''
     function to create a new user
@@ -49,7 +51,7 @@ def intro():
     print("Please sign up for an accout to enjoy services")
 
     while True:
-        print("Use these short codes : su - Sign up, lg - login, ex-Exit app")
+        print("Use these short codes : su - Sign up, lg - login, ex-Exit app \n")
         short_code = input().lower()
         if short_code == 'su':
             print("New User")
@@ -68,48 +70,65 @@ def intro():
 
             save_users(create_user(f_name,s_name,password))
             print('\n')
-            print(f"Congratulations {f_name} {s_name}, you now have an account")
+            print(f"Congratulations {f_name} {s_name}, you now have an account \n")
             print('\n')
         elif short_code == 'lg':
+           
             print("Enter the first name of your registered account")
             account_name = input()
             print("Enter your password")
             authentification = input()
-            if check_existing_user(f_name,password):
-                authentification =find_account(password)
+            if check_existing_user(authentification):
+                search_account = find_account(authentification)
             
 
 
                 while True:
-                    print(f"Welcome {authentification.first_name}")
-                    print("cc-To create new credential, vc-To view all your credentials, ex-exit account")
+                    print(f"Welcome {search_account.first_name} {search_account.second_name} \n")
+                    print("cc-To create new credential, vc-To view all your credentials, ex-exit account \n ")
                     short_code=input().lower()
                     if short_code == 'cc':
-
+                        print("New credential")
+                        print('-'*14)
                         print("Enter account name")
                         account_name = input()
-                        print("Enter its password")
-                        password = input()
-                        print(f"{account_name} has been saved")
+                        print("Make a password \n")
+                        print("To make your own password press- a, to generate a password press - g \n")
+                        generate=input()
 
-                        save_credential(create_credential(account_name,password))
+                        if generate == 'g':
+                            letters = string.ascii_letters + string.digits
+                            gpassword = ''.join(random.choice(letters) for i in range(9))
+                            print(f"Your new generated password is: {gpassword} \n")
+                            passkey=gpassword
+                            
+                        elif generate == 'a':
+                            print("Enter its password")
+                            passkey = input()
+                        print(f"{account_name} has been saved")
+                        
+                        save_credential(create_credential(account_name,passkey))
+
                     elif short_code == 'vc':
                         if display_credentials:
-                            print("Here is a list of all your accounts and passwords")
+                            print("Here is a list of all your accounts and passwords \n")
                             for credential in display_credentials():
-                                print(f"{credential.account_name} {credential.password}")
+                                print(f"Account name: {credential.account_name} password: {credential.passkey}")
 
                     elif short_code == 'ex':
-                        print("You have exited your account")
+                        print("You have exited your account \n")
                         break
-            
+            else:
+                print("The password was incorrect \n")
+                print('\n')
 
         elif short_code == 'ex':
 
-            print("Ok well. See yah!")
+            print("Ok well. See yah! \n")
+            print('\n')
             break
         else:
-            print("I cant understand that, please use these codes")
+            print("I cant understand that, please use these codes \n")
 if __name__ == '__main__':
 
     intro()
