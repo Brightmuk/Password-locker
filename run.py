@@ -17,7 +17,16 @@ def display_credentials():
     function that dispalys all credentials
     '''
     return Credential.display_credentials()
-
+def check_existing_user(f_name,password):
+    '''
+    function to check that enable login authentification
+    '''
+    return User.user_exist(f_name,password)
+def find_account(password):
+    '''
+    function to find account by its name
+    '''
+    return User.find_account(password)
 def create_user(f_name,s_name,password):
     '''
     function to create a new user
@@ -40,7 +49,7 @@ def intro():
     print("Please sign up for an accout to enjoy services")
 
     while True:
-        print("Use these short codes : su - sign up, lg - login")
+        print("Use these short codes : su - Sign up, lg - login, ex-Exit app")
         short_code = input().lower()
         if short_code == 'su':
             print("New User")
@@ -52,7 +61,7 @@ def intro():
             print("Enter your second name...")
             s_name=input()
 
-            print("Please confirm your password...")
+            print("Enter your password...")
             password=input()
 
 
@@ -62,37 +71,45 @@ def intro():
             print(f"Congratulations {f_name} {s_name}, you now have an account")
             print('\n')
         elif short_code == 'lg':
-            print("Enter the name of your registered account")
+            print("Enter the first name of your registered account")
             account_name = input()
             print("Enter your password")
             authentification = input()
-            while True:
-                print("cc-To create new credential, ex-exit account, vc-To view all your credentials")
-                short_code=input().lower()
-                if short_code == 'cc':
+            if check_existing_user(f_name,password):
+                authentification =find_account(password)
+            
 
-                    print("Enter account name")
-                    account_name = input()
-                    print("Enter its password")
-                    password = input()
-                    print(f"{account_name} has been saved")
 
-                    save_credential(create_credential(account_name,password))
-                elif short_code == 'vc':
-                    if display_credentials:
-                        print("Here is a list of all your accounts and passwords")
-                        for credential in display_credentials():
-                            print(f"{credential.account_name} {credential.password}")
-                            
-                elif short_code == 'ex':
-                    print("You have exited your account")
-                    break
-                else:
-                    print("Please use the codes provided")
+                while True:
+                    print(f"Welcome {authentification.first_name}")
+                    print("cc-To create new credential, vc-To view all your credentials, ex-exit account")
+                    short_code=input().lower()
+                    if short_code == 'cc':
 
-        else:
-            print("Ok well.")
+                        print("Enter account name")
+                        account_name = input()
+                        print("Enter its password")
+                        password = input()
+                        print(f"{account_name} has been saved")
+
+                        save_credential(create_credential(account_name,password))
+                    elif short_code == 'vc':
+                        if display_credentials:
+                            print("Here is a list of all your accounts and passwords")
+                            for credential in display_credentials():
+                                print(f"{credential.account_name} {credential.password}")
+
+                    elif short_code == 'ex':
+                        print("You have exited your account")
+                        break
+            
+
+        elif short_code == 'ex':
+
+            print("Ok well. See yah!")
             break
+        else:
+            print("I cant understand that, please use these codes")
 if __name__ == '__main__':
 
     intro()
