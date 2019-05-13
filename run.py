@@ -2,6 +2,7 @@ from user import User
 import string
 import random
 import getpass
+import pyperclip
 from credential import Credential
 
 def create_credential(account_name,passkey):
@@ -85,7 +86,7 @@ def intro():
             print("Enter the first name of your registered account")
             account_name = input()
             print('\n')
-        
+
             authentification = getpass.getpass('Password:')
             if check_existing_user(authentification):
                 search_account = find_account(authentification)
